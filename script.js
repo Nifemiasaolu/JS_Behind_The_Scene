@@ -1,38 +1,38 @@
 'use strict';
 
-function calcAge(birthYear) {
-  const age = 2037 - birthYear;
+// function calcAge(birthYear) {
+//   const age = 2037 - birthYear;
 
-  function printAge() {
-    let output = `${firstName}, your age is ${age}, born in ${birthYear}`;
-    // return output
-    // console.log(output);
+//   function printAge() {
+//     let output = `${firstName}, your age is ${age}, born in ${birthYear}`;
+//     // return output
+//     // console.log(output);
 
-    if (birthYear >= 1981 && birthYear <= 1995) {
-      var millenial = true;
-      //   Creating NEW variable with same name with as outer scopes
-      const lastName = 'Steven';
+//     if (birthYear >= 1981 && birthYear <= 1995) {
+//       var millenial = true;
+//       //   Creating NEW variable with same name with as outer scopes
+//       const lastName = 'Steven';
 
-      //   Reassigning outer scope's variable
-      // output = 'NEW OUTPUT'
+//       //   Reassigning outer scope's variable
+//       // output = 'NEW OUTPUT'
 
-      // const str = `Oh! You are a millenial, ${firstName}`;
-      // console.log(str);
+//       // const str = `Oh! You are a millenial, ${firstName}`;
+//       // console.log(str);
 
-      function add(a, b) {
-        return a + b;
-      }
-      // console.log(add(2, 3));
-    }
-    // console.log(millenial);
-    // console.log(output);
-  }
-  printAge();
-  return age;
-}
+//       function add(a, b) {
+//         return a + b;
+//       }
+//       // console.log(add(2, 3));
+//     }
+//     // console.log(millenial);
+//     // console.log(output);
+//   }
+//   printAge();
+//   return age;
+// }
 
-const firstName = 'Jonas';
-calcAge(1991);
+// const firstName = 'Jonas';
+// calcAge(1991);
 
 ////////////////////////////////////
 // Hoisting and TDZ in Practice
@@ -72,11 +72,32 @@ const addArr = (a, b) => a + b; //It will result in an error message because it 
 // WHILE FUNCTION EXPRESSION AND ARROW FUNCTION CANNOT BE CALLED BEFORE DEFINED
 
 // Example 
-console.log(numProduct);
+// console.log(numProduct);
 
 if (!numProduct) deleteShoppingCart();
 var numProduct = 10;
 
 function deleteShoppingCart () {
-  console.log('ALL PRODUCTS DELETED!');
+  // console.log('ALL PRODUCTS DELETED!');
 }
+
+
+/////////////////////////
+// THIS Keyword
+
+console.log(this);
+
+const calcAge = function (birthYear) {
+  console.log(2037 - birthYear);
+  console.log(this);    // The THIS Keyword in this regard points to be undefined 
+  // because there's no object that is declared specifically with the method.
+};
+calcAge(1991);
+
+
+const calcAgeArrow = birthYear => {
+  console.log(2037 - birthYear);
+  console.log(this);    //The THIS Keyword in the arrow function points to the GLOBAL SCOPE (Result: WIndow)
+  // NOTE: The ARROW Function does not get it's own THIS Keyword  
+};
+calcAgeArrow(1980);
