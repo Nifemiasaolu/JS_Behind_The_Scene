@@ -131,53 +131,93 @@
 
 // var firstName = 'Matilda'; Never Use var as a variable keyword.
 
-const jonas = {
-  firstName: 'Jonas',
-  year: 1991,
+// const jonas = {
+//   firstName: 'Jonas',
+//   year: 1991,
 
-  calcAge: function () {
-    // console.log(this);
-    // console.log(2037 - this.year);
+//   calcAge: function () {
+// console.log(this);
+// console.log(2037 - this.year);
 
-    //  SOLUTION 1 (BEFORE ES6)
-    // const self = this; // You can use 'self' or 'that'.
-    // const isMillenial = function () {
-    //   console.log(self); // INSIDE A REGULAR FUNCTION CALL, THE THIS KEYWORD IS ALWAYS SET TO BE UNDEFINED
-    //   console.log(self.year >= 1981 && self.year <= 1996);
-    //   // console.log(this.year >= 1981 && this.year <= 1996);
-    // };
+//  SOLUTION 1 (BEFORE ES6)
+// const self = this; // You can use 'self' or 'that'.
+// const isMillenial = function () {
+//   console.log(self); // INSIDE A REGULAR FUNCTION CALL, THE THIS KEYWORD IS ALWAYS SET TO BE UNDEFINED
+//   console.log(self.year >= 1981 && self.year <= 1996);
+//   // console.log(this.year >= 1981 && this.year <= 1996);
+// };
 
-    //  SOLUTION 2 (USING ARROW FUNCTION, AFTER ES6) MODERN SOLUTION
-    const isMillenial = () => {
-      console.log(this); // ARROW FUNCTION DOES NOT HAVE IT'S OWN THIS KEYWORD
-      console.log(this.year >= 1981 && this.year <= 1996);
-    };
+//  SOLUTION 2 (USING ARROW FUNCTION, AFTER ES6) MODERN SOLUTION
+// const isMillenial = () => {
+// console.log(this); // ARROW FUNCTION DOES NOT HAVE IT'S OWN THIS KEYWORD
+// console.log(this.year >= 1981 && this.year <= 1996);
+// };
 
-    // THIS SIMPLY MEANS THAT IN A REGULAR FUNCTION(INSIDE A FUNCTION) , THIS KEYWORD WILL NOT WORK
-    // WHILE IN AN ARROW FUNCTION (INSIDE A FUNCTION), THE THIS KEYWORD WILL WORK.
-    isMillenial();
-  },
+// THIS SIMPLY MEANS THAT IN A REGULAR FUNCTION(INSIDE A FUNCTION) , THIS KEYWORD WILL NOT WORK
+// WHILE IN AN ARROW FUNCTION (INSIDE A FUNCTION), THE THIS KEYWORD WILL WORK.
+// isMillenial();
+// },
 
-  // greet: () => console.log(`Hey ${this.firstName}`), // NOTE: NEVER USE AN ARROW FUNCTION AS A METHOD
-};
+// greet: () => console.log(`Hey ${this.firstName}`), // NOTE: NEVER USE AN ARROW FUNCTION AS A METHOD
+// };
 // jonas.greet();
-jonas.calcAge();
+// jonas.calcAge();
 
 ///////////////////////////////
 // ARGUMENT KEYWORD
 
-var addExpr = function (a, b) {
-  console.log(arguments);
-  return a + b;
+// var addExpr = function (a, b) {
+//   console.log(arguments);
+//   return a + b;
+// };
+
+// addExpr(2, 3);
+// addExpr(2, 3, 5, 4);
+
+// const addArr = (a, b) => {
+//  console.log(arguments);
+//  return a + b
+// };
+// addArr(3,5);
+
+// IN SUMMARY, ARGUMENTS EXISTS IN REGULAR FUNCTION (BOTH EXPRESSION AND DECLARATION), BUT NOT IN ARROW FUNCTION.
+
+//////////////////////////////////////////
+// PRIMITIVE VS OBJECT VALUES
+
+// PRIMITIVE TYPES
+let lastName = 'Williams';
+let oldLastName = lastName;
+lastName = 'Davis';
+
+console.log(lastName, oldLastName);
+
+// REFERENCE TYPES
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
 };
 
-addExpr(2, 3);
-addExpr(2, 3, 5, 4);
+const marriedJessica = jessica;
+marriedJessica.lastName = 'Davis';
 
-const addArr = (a, b) => {
- console.log(arguments);
- return a + b
-}; 
-addArr(3,5);
+console.log('Before Marriage:', jessica);
+console.log('After Marriage:', marriedJessica);
 
-// IN SUMMARY, ARGUMENTS EXISTS IN REGULAR FUNCTION (BOTH EXPRESSION AND DECLARATION), BUT NOT IN ARROW FUNCTION. 
+// COPYING OBJECTS
+
+const jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bob'],
+};
+
+const jessicaCopy = Object.assign({}, jessica2);
+jessicaCopy.lastName = 'Davis';
+jessicaCopy.family.push('Mary');
+jessicaCopy.family.push('John');
+
+console.log('Before Marriage:', jessica2);
+console.log('After Marriage:', jessicaCopy);
