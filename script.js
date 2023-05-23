@@ -45,10 +45,9 @@
 // console.log(job);
 // console.log(year);
 
-var me = 'Jonas';
-let job = 'Teacher';
+// var me = 'Jonas';
+// let job = 'Teacher';
 // const year = 1991;
-
 
 // Function Hoisting
 
@@ -57,47 +56,92 @@ let job = 'Teacher';
 // console.log(addExpr(2, 3));
 // console.log(addArr(2, 3));
 
-function addDecl(a, b) {
-  return a + b;
-}
+// function addDecl(a, b) {
+//   return a + b;
+// }
 
-var addExpr = function (a, b) {  //VAR will result to it being 'undefined' because the function is declared with a VAR
-  return a + b;
-};
+// var addExpr = function (a, b) {
+//   //VAR will result to it being 'undefined' because the function is declared with a VAR
+//   return a + b;
+// };
 
-const addArr = (a, b) => a + b; //It will result in an error message because it is declared with a const.
+// const addArr = (a, b) => a + b; //It will result in an error message because it is declared with a const.
 
-// NOTE: 
+// NOTE:
 // FUNCTION DECLARATION CAN  BE CALLED BEFORE IT IS DEFINED
 // WHILE FUNCTION EXPRESSION AND ARROW FUNCTION CANNOT BE CALLED BEFORE DEFINED
 
-// Example 
+// Example
 // console.log(numProduct);
 
-if (!numProduct) deleteShoppingCart();
-var numProduct = 10;
+// if (!numProduct) deleteShoppingCart();
+// var numProduct = 10;
 
-function deleteShoppingCart () {
+// function deleteShoppingCart() {
   // console.log('ALL PRODUCTS DELETED!');
-}
-
+// }
 
 /////////////////////////
 // THIS Keyword
 
-console.log(this);
+// console.log(this);
 
-const calcAge = function (birthYear) {
-  console.log(2037 - birthYear);
-  console.log(this);    // The THIS Keyword in this regard points to be undefined 
+// const calcAge = function (birthYear) {
+  // console.log(2037 - birthYear);
+  // console.log(this); // The THIS Keyword in this regard points to be undefined
   // because there's no object that is declared specifically with the method.
-};
-calcAge(1991);
+// };
+// calcAge(1991);
+
+// const calcAgeArrow = birthYear => {
+  // console.log(2037 - birthYear);
+  // console.log(this); //The THIS Keyword in the arrow function points to the GLOBAL SCOPE (Result: WIndow)
+  // NOTE: The ARROW Function does not get it's own THIS Keyword
+// };
+// calcAgeArrow(1980);
+
+// const jonas = {
+//   year: 1991,
+//   calcAge: function () {
+//     console.log(this); //when we have a method call, the THIS Keyword inside the method will be
+//     // the OBJECT of the method being called. ==> this === jonas, jonas.calcAge === this.calcAge.
+//     console.log(2037 - this.year);
+//   },
+// };
+// jonas.calcAge();
 
 
-const calcAgeArrow = birthYear => {
-  console.log(2037 - birthYear);
-  console.log(this);    //The THIS Keyword in the arrow function points to the GLOBAL SCOPE (Result: WIndow)
-  // NOTE: The ARROW Function does not get it's own THIS Keyword  
+// NOTE: The THIS keyword will point to the OBJECT that is CALLING the METHOD. It won't
+// simply point to the OBJECT in which we wrote the METHOD.
+
+
+// AN ARROW FUNCTION DOES NOT GET ITS OWN THIS KEYWORD, IT WILL SIMPLY USE THE ONE FROM IT'S SURROUNDINGS.
+// Example
+
+// const matilda = {
+//   year: 2017,
+// }
+
+// matilda.calcAge = jonas.calcAge; //This is called METHOD BORROWING
+// matilda.calcAge();
+
+// const f = jonas.calcAge;
+// f();
+
+
+//////////////////////////////////////////////
+// REGULAR FUNCTION VS ARROW FUNCTION
+
+
+const jonas = {
+  firstName: 'Jonas',
+  year: 1991,
+  calcAge: function () {
+    console.log(this); 
+    console.log(2037 - this.year);
+  },
+
+  greet: () => console.log(`Hey ${this.firstName}`),
+
 };
-calcAgeArrow(1980);
+jonas.greet();
