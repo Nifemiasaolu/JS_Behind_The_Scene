@@ -78,7 +78,7 @@
 // var numProduct = 10;
 
 // function deleteShoppingCart() {
-  // console.log('ALL PRODUCTS DELETED!');
+// console.log('ALL PRODUCTS DELETED!');
 // }
 
 /////////////////////////
@@ -87,16 +87,16 @@
 // console.log(this);
 
 // const calcAge = function (birthYear) {
-  // console.log(2037 - birthYear);
-  // console.log(this); // The THIS Keyword in this regard points to be undefined
-  // because there's no object that is declared specifically with the method.
+// console.log(2037 - birthYear);
+// console.log(this); // The THIS Keyword in this regard points to be undefined
+// because there's no object that is declared specifically with the method.
 // };
 // calcAge(1991);
 
 // const calcAgeArrow = birthYear => {
-  // console.log(2037 - birthYear);
-  // console.log(this); //The THIS Keyword in the arrow function points to the GLOBAL SCOPE (Result: WIndow)
-  // NOTE: The ARROW Function does not get it's own THIS Keyword
+// console.log(2037 - birthYear);
+// console.log(this); //The THIS Keyword in the arrow function points to the GLOBAL SCOPE (Result: WIndow)
+// NOTE: The ARROW Function does not get it's own THIS Keyword
 // };
 // calcAgeArrow(1980);
 
@@ -110,10 +110,8 @@
 // };
 // jonas.calcAge();
 
-
 // NOTE: The THIS keyword will point to the OBJECT that is CALLING the METHOD. It won't
 // simply point to the OBJECT in which we wrote the METHOD.
-
 
 // AN ARROW FUNCTION DOES NOT GET ITS OWN THIS KEYWORD, IT WILL SIMPLY USE THE ONE FROM IT'S SURROUNDINGS.
 // Example
@@ -128,20 +126,58 @@
 // const f = jonas.calcAge;
 // f();
 
-
 //////////////////////////////////////////////
 // REGULAR FUNCTION VS ARROW FUNCTION
 
+// var firstName = 'Matilda'; Never Use var as a variable keyword.
 
 const jonas = {
   firstName: 'Jonas',
   year: 1991,
+
   calcAge: function () {
-    console.log(this); 
-    console.log(2037 - this.year);
+    // console.log(this);
+    // console.log(2037 - this.year);
+
+    //  SOLUTION 1 (BEFORE ES6)
+    // const self = this; // You can use 'self' or 'that'.
+    // const isMillenial = function () {
+    //   console.log(self); // INSIDE A REGULAR FUNCTION CALL, THE THIS KEYWORD IS ALWAYS SET TO BE UNDEFINED
+    //   console.log(self.year >= 1981 && self.year <= 1996);
+    //   // console.log(this.year >= 1981 && this.year <= 1996);
+    // };
+
+    //  SOLUTION 2 (USING ARROW FUNCTION, AFTER ES6) MODERN SOLUTION
+    const isMillenial = () => {
+      console.log(this); // ARROW FUNCTION DOES NOT HAVE IT'S OWN THIS KEYWORD
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+
+    // THIS SIMPLY MEANS THAT IN A REGULAR FUNCTION(INSIDE A FUNCTION) , THIS KEYWORD WILL NOT WORK
+    // WHILE IN AN ARROW FUNCTION (INSIDE A FUNCTION), THE THIS KEYWORD WILL WORK.
+    isMillenial();
   },
 
-  greet: () => console.log(`Hey ${this.firstName}`),
-
+  // greet: () => console.log(`Hey ${this.firstName}`), // NOTE: NEVER USE AN ARROW FUNCTION AS A METHOD
 };
-jonas.greet();
+// jonas.greet();
+jonas.calcAge();
+
+///////////////////////////////
+// ARGUMENT KEYWORD
+
+var addExpr = function (a, b) {
+  console.log(arguments);
+  return a + b;
+};
+
+addExpr(2, 3);
+addExpr(2, 3, 5, 4);
+
+const addArr = (a, b) => {
+ console.log(arguments);
+ return a + b
+}; 
+addArr(3,5);
+
+// IN SUMMARY, ARGUMENTS EXISTS IN REGULAR FUNCTION (BOTH EXPRESSION AND DECLARATION), BUT NOT IN ARROW FUNCTION. 
